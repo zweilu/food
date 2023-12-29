@@ -5,9 +5,10 @@ import com.example.wei.springbootfood.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -25,4 +26,35 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PostMapping("/products")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        Integer productId = productService.createProduct(product);
+
+        Product pd = productService.getProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(pd);
+    }
+
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
+                                                 @RequestBody Product product){
+
+        //檢查product是否存在
+        Product upProduct = productService.getProductById(productId);
+
+        if (upProduct == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        //修改商品數據
+        productService.updateProduct(productId , product);
+
+        Product updateProduct = productService.getProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
+    }
+
+
+
 }
+
