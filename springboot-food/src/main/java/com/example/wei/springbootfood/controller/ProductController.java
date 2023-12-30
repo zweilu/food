@@ -5,9 +5,12 @@ import com.example.wei.springbootfood.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -15,6 +18,29 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+//    @GetMapping("/products")
+//    public ResponseEntity<List<Product>> getProducts(){
+//        List<Product> productList = productService.getProducts();
+//
+//        return  ResponseEntity.status(HttpStatus.OK).body(productList);
+//    }
+
+    @GetMapping("/products")
+    public String getProducts(Model model) {
+        List<Product> productList = productService.getProducts();
+
+        // 假设图片存储在 "/images" 目录下
+        productList.forEach(product -> {
+            String imageFileName = product.getPic();
+            String imagePath = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/templates/images" + imageFileName; // 相对于 images 文件夹的路径
+            product.setPic(imagePath);
+        });
+
+        model.addAttribute("products", productList);
+        return "index"; // 返回对应的 Thymeleaf 模板
+    }
+
 
     @GetMapping("/products/{productsId}")
     public ResponseEntity<Product>getProduct(@PathVariable Integer productsId){
@@ -53,6 +79,14 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
     }
+
+    @DeleteMapping("products/{productId}")
+    public  ResponseEntity<Product> deleteProduct(@PathVariable Integer productId){
+        productService.deleteProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
 
 

@@ -24,6 +24,18 @@ public class productDaoImpl implements ProductDao {
 
     @Autowired
     private  NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Override
+    public List<Product> getProducts() {
+        String sql =  "select product_id, product_name, price, pic"+
+                " from product";
+        Map<String,Object> map = new HashMap<>();
+
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map , new ProductRowMapper());
+
+        return productList;
+    }
+
     @Override
     public Product getProductById(Integer productId) {
        String sql =  "select product_id, product_name, price, pic"+
@@ -80,7 +92,16 @@ public class productDaoImpl implements ProductDao {
         namedParameterJdbcTemplate.update(sql, map);
     }
 
+    @Override
+    public void deleteProductById(Integer productId) {
+        String sql = "DELETE FROM product WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+
+        namedParameterJdbcTemplate.update(sql, map);
     }
+}
 
 
 

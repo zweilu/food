@@ -15,35 +15,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-
-    <title>Google Charts Example</title>
-  <!-- 引入 Google Charts 库 -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['餐點', '銷售量', { role: 'style' }],
-        ['漢堡', 300, 'color: #3366cc'],
-        ['捲餅', 500, 'color: #dc3912'],
-        ['炸雞', 400, 'color: #ff9900'],
-        ['炒飯', 600, 'color: #109618'],
-        ['薯條', 250, 'color: #990099']
-        // 添加更多餐點和銷量数据
-      ]);
-
-      var options = {
-        title: '餐點銷售數據',
-        chartArea: {width: '50%'},
-        is3D: true, // 啟用3D效果
-      };
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-  </script>
     <style>
       body{
         box-sizing: border-box;
@@ -91,31 +62,48 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">菜單</a>
+                <a class="nav-link active" aria-current="page" href="index.html">菜單</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./praoductadd.html">商品上架</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesrecord.html">銷售紀錄</a>
+                <a class="nav-link" href="salesrecord.html">銷售紀錄</a>
               </li>
   
               <li class="nav-item">
-                <a class="nav-link" href="#">銷售圖表</a>
+                <a class="nav-link" href="chart.html">銷售圖表</a>
               </li>
             </form>
     </section>
-    <section class="sec2 ">
-        <div class="d-flex justify-content-center mt-5">
-            <div id="chart_div" style="width: 900px; height: 500px;"></div>
+   
+    <section class="sec2">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+
           </div>
-    </section>
+          <div class="col-4">
+            <img src="images/steak.jpg" class="img-thumbnail square-img mt-5" alt="...">
             
-          
-          
+            
+            <form method="post">
+              商品名稱: <input class="mt-2" type="pname" name="pname">
+              <br>
+              商品價格: <input class="mt-2" type="price" name="price">
+              <br>
+              <button type="button" class="btn btn-danger mt-2" onclick="window.location.href='index.html'">上架</button>
+            </form>
+          </div>
+          <div class="col-4">
+            
+          </div>
         </div>
       </div>
-    </nav>
+    </section>      
+          
+          
+       
 
     <footer class="fixed-bottom">
       <div class="container">
@@ -123,8 +111,5 @@
         <p>地址：某某路某某號 | 電話：123-456-7890 | Email：info@example.com</p>
       </div>
     </footer>
-    
   </body>
-    
-  
 </html>

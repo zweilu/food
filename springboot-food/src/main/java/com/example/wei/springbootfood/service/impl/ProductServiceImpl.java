@@ -6,11 +6,20 @@ import com.example.wei.springbootfood.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDao productDao;
+
+
+    @Override
+    public List<Product> getProducts() {
+        return productDao.getProducts();
+    }
+
     @Override
     public Product getProductById(Integer productId) {
         return productDao.getProductById(productId);
@@ -24,5 +33,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Integer productId, Product product) {
          productDao.updateProduct(productId, product);
+    }
+
+    @Override
+    public void deleteProductById(Integer productId) {
+        productDao.deleteProductById(productId);
     }
 }
