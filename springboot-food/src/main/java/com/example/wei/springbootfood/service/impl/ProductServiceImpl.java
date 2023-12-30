@@ -23,6 +23,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Integer productId, Product product) {
-
+         productDao.updateProduct(productId, product);
     }
 }

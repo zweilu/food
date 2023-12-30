@@ -70,10 +70,12 @@ public class productDaoImpl implements ProductDao {
         String sql = "UPDATE product SET product_name = :productName, price = :price, pic = :pic WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId); // Assuming productId exists in the Product object
+
         map.put("productName", product.getProductName());
         map.put("price", product.getPrice());
         map.put("pic", product.getPic());
-        map.put("productId", product.getProductId()); // Assuming productId exists in the Product object
+
 
         namedParameterJdbcTemplate.update(sql, map);
     }
