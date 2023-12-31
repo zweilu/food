@@ -19,27 +19,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-//    @GetMapping("/products")
-//    public ResponseEntity<List<Product>> getProducts(){
-//        List<Product> productList = productService.getProducts();
-//
-//        return  ResponseEntity.status(HttpStatus.OK).body(productList);
-//    }
-
     @GetMapping("/products")
-    public String getProducts(Model model) {
+    public ResponseEntity<List<Product>> getProducts(){
         List<Product> productList = productService.getProducts();
 
-        // 假设图片存储在 "/images" 目录下
-        productList.forEach(product -> {
-            String imageFileName = product.getPic();
-            String imagePath = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/templates/images" + imageFileName; // 相对于 images 文件夹的路径
-            product.setPic(imagePath);
-        });
-
-        model.addAttribute("products", productList);
-        return "index"; // 返回对应的 Thymeleaf 模板
+        return  ResponseEntity.status(HttpStatus.OK).body(productList);
     }
+
+
 
 
     @GetMapping("/products/{productsId}")

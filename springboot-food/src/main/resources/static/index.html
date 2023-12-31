@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:margin="http://www.w3.org/1999/xhtml" xmlns:right="http://www.w3.org/1999/xhtml"
+      xmlns:bottom="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+  />
+  <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"
+  ></script>
+  <style>
+    body{
+      box-sizing: border-box;
+      background-color: orange;
+    }
+    .square-img{
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .quantity-size{
+      width: 100px;
+
+    }
+    footer {
+      background-color: orangered;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    .btn{
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+<section class="sec1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">異國料理混合餐廳</a>
+      <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html">菜單</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="praoductmange.html">商品管理</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./salesrecord.html">銷售紀錄</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="./chart.html">銷售圖表</a>
+          </li>
+          </form>
+</section>
+<section class="sec2 mb-2 d-flex justify-content-center ">
+  <div class="row d-flex justify-content-center ms-5 mt-5" id="productList">
+    <!-- Product items will be added here dynamically -->
+  </div>
+
+  <div style="position: fixed; bottom: 0; right: 0; margin: 20px; z-index: 2;">
+    <button type="button" class="btn btn-success custom-btn d-inline-block" onclick="window.location.href='./confirm.html'">購買</button>
+  </div>
+
+
+</section>
+
+<div class="row " id="productList">
+  <!-- Product items will be added here dynamically -->
+</div>
+
+
+
+<footer>
+  <div class="container">
+    <p>異國餐廳 &copy; 2023. All Rights Reserved.</p>
+    <p>地址：某某路某某號 | 電話：123-456-7890 | Email：info@example.com</p>
+  </div>
+</footer>
+<script>
+
+  fetch('http://localhost:8888/products')
+          .then(response => response.json())
+          .then(products => {
+            const productList = document.getElementById('productList');
+
+            // 每行顯示三個產品
+            for (let i = 0; i < products.length; i += 3) {
+              const row = document.createElement('div');
+              row.classList.add('row', 'mb-3');
+
+              for (let j = i; j < i + 3 && j < products.length; j++) {
+                const product = products[j];
+                const col = document.createElement('div');
+                col.classList.add('col-4');
+
+                col.innerHTML = `
+            <img src="./images/${product.pic}" class="img-thumbnail square-img" alt="${product.productName}">
+            <div class="mb-3">
+              <h5 class="mt-1">${product.productName} ${product.price}元</h5>
+              <label for="quantity" class="form-label">選擇數量：</label>
+              <input type="number" id="quantity" name="quantity" class="form-control quantity-size" value="1" min="1">
+            </div>
+          `;
+
+                row.appendChild(col);
+              }
+
+              productList.appendChild(row);
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching products:', error);
+          });
+</script>
+
+
+
+
+</body>
+</html>
