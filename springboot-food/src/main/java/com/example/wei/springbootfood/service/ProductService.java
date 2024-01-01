@@ -18,4 +18,5 @@ public interface ProductService {
     void deleteProductById(Integer productId);
 
 
+    void save(Product product);
 }

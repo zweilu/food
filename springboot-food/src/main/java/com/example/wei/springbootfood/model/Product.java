@@ -1,11 +1,15 @@
 package com.example.wei.springbootfood.model;
 
+
 public class Product {
 
     private Integer productId;
     private String productName;
     private Integer price;
     private String pic;
+
+    public Product() {
+    }
 
     public Integer getProductId() {
         return productId;
@@ -38,4 +42,6 @@ public class Product {
     public void setPic(String pic) {
         this.pic = pic;
     }
+
+
 }

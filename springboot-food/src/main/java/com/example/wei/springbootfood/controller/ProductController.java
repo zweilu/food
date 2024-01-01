@@ -1,14 +1,21 @@
 package com.example.wei.springbootfood.controller;
 
 import com.example.wei.springbootfood.model.Product;
+import com.example.wei.springbootfood.request.ProductRequest;
 import com.example.wei.springbootfood.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,15 +47,32 @@ public class ProductController {
         }
     }
 
+
+
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        Integer productId = productService.createProduct(product);
+    public ResponseEntity<?> createProduct(
+            @ModelAttribute ProductRequest productRequest,
+            @RequestParam("productImage") MultipartFile productImage) {
 
-        Product pd = productService.getProductById(productId);
+        try {
+            String filename = productImage.getOriginalFilename();
+            String path = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/static/images/" + filename;
+            File newFile = new File(path);
+            productImage.transferTo(newFile);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pd);
+            Product product = new Product();
+            product.setProductName(productRequest.getProductName());
+            product.setPrice(productRequest.getProductPrice());
+            product.setPic(filename);
+
+            productService.save(product);
+
+            return ResponseEntity.ok("Product successfully added");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving the file");
+        }
     }
-
     @PutMapping("/products/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
                                                  @RequestBody Product product){

@@ -50,13 +50,25 @@
         object-fit: cover; /* 保持圖片比例填滿容器 */
       }
 
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: orangered;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .sec2 {
+        padding-bottom: 160px; /* 设置一个足够大的内边距，避免 footer 遮挡 */
+      }
     </style>
   </head>
   <body>
     <section class="sec1">
       <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">異國料理混合餐廳</a>
+          <a class="navbar-brand" href="#">餐廳點菜系統</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -74,7 +86,7 @@
                 <a class="nav-link active" aria-current="page" href="index.html">菜單</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./praoductmange.html">商品管理</a>
+                <a class="nav-link" href="./productmange.html">商品管理</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="salesrecord.html">銷售紀錄</a>
@@ -103,28 +115,8 @@
           </tbody>
         </table>
       </div>
-<!--      <div class="container">-->
-<!--        <div class="row">-->
-<!--          <div class="col-4">-->
 
-<!--          </div>-->
-<!--          <div class="col-4">-->
-<!--            <img src="images/steak.jpg" class="img-thumbnail square-img mt-5" alt="...">-->
-<!--            -->
-<!--            -->
-<!--            <form method="post">-->
-<!--              商品名稱: <input class="mt-2" type="pname" name="pname">-->
-<!--              <br>-->
-<!--              商品價格: <input class="mt-2" type="price" name="price">-->
-<!--              <br>-->
-<!--              <button type="button" class="btn btn-danger mt-2" onclick="window.location.href='index.html'">上架</button>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--          <div class="col-4">-->
-<!--            -->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+
     </section>      
           
           
@@ -151,7 +143,7 @@
           <td>${product.price}</td>
           <td><img src="./images/${product.pic}" class="img-thumbnail" alt="${product.productName}"></td>
           <td>
-            <button class="btn btn-primary btn-sm" onclick="editProduct(${product.productId})">修改</button>
+            <button class="btn btn-primary btn-sm" onclick="window.location.href='productupdate.html?productId=${product.productId}'">修改</button>
             <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.productId})">刪除</button>
             <button class="btn btn-success btn-sm" onclick="window.location.href='productadd.html'">新增</button>
           </td>
@@ -172,10 +164,27 @@
       }
 
       function deleteProduct(productId) {
-        // 實現刪除產品的邏輯
-        // 提交刪除請求到後端處理，可以使用fetch或其他方法
-        // 使用productId來標識要刪除的產品
-        // ...
+        if (confirm('確定要刪除該商品嗎？')) {
+          fetch(`http://localhost:8888/products/${productId}`, {
+            method: 'DELETE',
+          })
+                  .then(response => {
+                    if (response.ok) {
+                      // 删除成功，从页面移除该商品信息
+                      const productRow = document.getElementById(`product-${productId}`);
+                      if (productRow) {
+                        productRow.remove();
+                      } else {
+                        console.error('無法找到要刪除的商品');
+                      }
+                    } else {
+                      throw new Error('無法刪除商品');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('刪除商品時出錯:', error);
+                  });
+        }
       }
     </script>
   </body>

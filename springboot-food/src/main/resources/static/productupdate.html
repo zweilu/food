@@ -84,32 +84,27 @@
                     </form>
 </section>
 
-<form id="addProductForm" enctype="multipart/form-data">
+<section class="sec2 d-flex justify-content-center align-items-center">
     <div class="container">
-        <h2 class="text-center">新增商品</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="productName" class="form-label">商品名稱</label>
-                    <input type="text" class="form-control" id="productName" name="productName" required>
-                </div>
+        <h2 class="text-center">修改商品資料</h2>
+        <form id="updateProductForm">
+            <div class="mb-3">
+                <label for="productName" class="form-label">商品名稱</label>
+                <input type="text" class="form-control" id="productName" name="productName">
             </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="productPrice" class="form-label">商品價格</label>
-                    <input type="number" class="form-control" id="productPrice" name="productPrice" required>
-                </div>
+            <div class="mb-3">
+                <label for="productPrice" class="form-label">商品價格</label>
+                <input type="text" class="form-control" id="productPrice" name="productPrice">
             </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="productImage" class="form-label">商品圖片</label>
-                    <input type="file" class="form-control" id="productImage" name="productImage" accept="image/*" required>
-                </div>
+            <div class="mb-3">
+                <label for="productImage" class="form-label">商品圖片 URL</label>
+                <input type="text" class="form-control" id="productImage" name="productImage">
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">新增</button>
+            <button type="submit" class="btn btn-primary">修改</button>
+        </form>
     </div>
-</form>
+</section>
+
 
 
 </div>
@@ -123,40 +118,41 @@
     </div>
 </footer>
 
-
 <script>
-    // 表單提交事件
-    document.getElementById('addProductForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+
+    document.getElementById('updateProductForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 防止預設的表單提交行為
 
         const productName = document.getElementById('productName').value;
         const productPrice = document.getElementById('productPrice').value;
-        const productImage = document.getElementById('productImage').files[0]; // 获取上传的图片文件
+        const productImage = document.getElementById('productImage').value;
 
-        const formData = new FormData(); // 创建 FormData 对象来进行图片上传
-        formData.append('productName', productName);
-        formData.append('productPrice', productPrice);
-        formData.append('productImage', productImage); // 将图片信息放入 FormData 中
+        // 做一些資料驗證
 
-        fetch('localhost:8888/products', {
-            method: 'POST',
-            body: formData,
-            // 设置正确的 Content-Type
-            headers: {
-                // 无需手动设置 Content-Type，FormData 会自动设置
+        // 假設使用 fetch 來發送資料到後端
+        document.addEventListener("DOMContentLoaded", function() {
+            // 获取 URL 参数
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('productId');
+
+            // 如果 productId 存在，你可以根据它执行相应操作
+            if (productId) {
+                // 填充表单或执行其他操作
+                // 例如：
+                // 通过 fetch 请求获取特定商品的详细信息，并填充到表单中
+                fetch(`http://localhost:8888/products/${productId}`)
+                    .then(response => response.json())
+                    .then(product => {
+                        // 填充表单字段
+                        document.getElementById('productName').value = product.productName;
+                        document.getElementById('productPrice').value = product.price;
+                        document.getElementById('productImage').value = product.pic;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product details:', error);
+                    });
             }
-        })
-            .then(response => response.json())
-            .then(newProduct => {
-                console.log('New product created:', newProduct);
-                // 重载页面以显示新商品
-                window.location.href = 'productmange.html'; // 返回商品管理页面
-            })
-            .catch(error => {
-                console.error('Error creating product:', error);
-                // 处理错误
-            });
-    });
+        });
 </script>
 
 </body>
