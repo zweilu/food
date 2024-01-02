@@ -33,9 +33,6 @@ public class ProductController {
         return  ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 
-
-
-
     @GetMapping("/products/{productsId}")
     public ResponseEntity<Product>getProduct(@PathVariable Integer productsId){
         Product product = productService.getProductById(productsId);
@@ -47,19 +44,17 @@ public class ProductController {
         }
     }
 
-
-
     @PostMapping("/products")
     public ResponseEntity<?> createProduct(
-            @ModelAttribute ProductRequest productRequest,
-            @RequestParam("productImage") MultipartFile productImage) {
+    		@ModelAttribute ProductRequest productRequest,
+    		@RequestParam("productImage") MultipartFile productImage) {
 
         try {
             String filename = productImage.getOriginalFilename();
-            String path = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/static/images/" + filename;
+            String path = "E:/"+filename;
             File newFile = new File(path);
             productImage.transferTo(newFile);
-
+            
             Product product = new Product();
             product.setProductName(productRequest.getProductName());
             product.setPrice(productRequest.getProductPrice());
