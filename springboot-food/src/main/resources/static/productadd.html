@@ -18,6 +18,7 @@
 
 
     <style>
+
         body{
             box-sizing: border-box;
             background-color: orange;
@@ -138,23 +139,23 @@
         formData.append('productPrice', productPrice);
         formData.append('productImage', productImage); // 将图片信息放入 FormData 中
 
-        fetch('localhost:8888/products', {
+        fetch('http://localhost:8888/products', {
             method: 'POST',
             body: formData,
-            // 设置正确的 Content-Type
+            // 設置正確的 Content-Type
             headers: {
-                // 无需手动设置 Content-Type，FormData 会自动设置
+
             }
         })
             .then(response => response.json())
             .then(newProduct => {
                 console.log('New product created:', newProduct);
-                // 重载页面以显示新商品
-                window.location.href = 'productmange.html'; // 返回商品管理页面
+                // 重載頁面以顯示新商品
+                window.location.href = 'productmange.html'; // 返回商品管理頁面
             })
             .catch(error => {
                 console.error('Error creating product:', error);
-                // 处理错误
+                // 處理錯誤
             });
     });
 </script>

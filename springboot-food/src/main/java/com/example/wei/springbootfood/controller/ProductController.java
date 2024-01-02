@@ -65,12 +65,17 @@ public class ProductController {
             product.setPrice(productRequest.getProductPrice());
             product.setPic(filename);
 
-            productService.save(product);
+            productService.createProduct(product);
 
-            return ResponseEntity.ok("Product successfully added");
+            // 返回 JSON 格式
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Product successfully added");
+            return ResponseEntity.ok(response);
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving the file");
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", "Error saving the file");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
     @PutMapping("/products/{productId}")

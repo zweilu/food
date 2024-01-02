@@ -1,11 +1,28 @@
 package com.example.wei.springbootfood.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductRequest {
 
-        private String productName;
-        private Integer productPrice;
-        // 无需添加图片字段，因为它将作为MultipartFile处理
-        // getter和setter方法
+    private String productName;
+
+    private Integer productPrice;
+
+
+
+    public ProductRequest(String productName, Integer productPrice) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+
+    }
+
+    public ProductRequest() {
+
+    }
+
+//    public String getProductName() {
+//        return productName;
+//    }
 
 
     public String getProductName() {
@@ -24,3 +41,5 @@ public class ProductRequest {
         this.productPrice = productPrice;
     }
 }
+
+

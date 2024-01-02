@@ -1,6 +1,5 @@
 package com.example.wei.springbootfood.model;
 
-
 public class Product {
 
     private Integer productId;
