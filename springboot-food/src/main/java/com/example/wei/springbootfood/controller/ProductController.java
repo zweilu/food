@@ -79,21 +79,35 @@ public class ProductController {
         }
     }
     @PutMapping("/products/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
-                                                 @RequestBody Product product){
+    public ResponseEntity<?> updateProduct(@PathVariable Integer productId,
+                                                 @ModelAttribute ProductRequest productRequest,
+                                                 @RequestParam("productImage") MultipartFile productImage){
 
-        //檢查product是否存在
-        Product upProduct = productService.getProductById(productId);
+        try {
+            String filename = productImage.getOriginalFilename();
+            String path = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/static/images/" + filename;
+            File newFile = new File(path);
+            productImage.transferTo(newFile);
 
-        if (upProduct == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            Product product = productService.getProductById(productId);
+            if (product == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+            }
+
+            product.setProductName(productRequest.getProductName());
+            product.setPrice(productRequest.getProductPrice());
+            product.setPic(filename);
+
+            productService.updateProduct(productId, product);
+
+            // 返回更新后的商品訊息
+
+            return ResponseEntity.ok(product);
+        } catch (IOException e) {
+            // 错误处理
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving the file");
         }
-        //修改商品數據
-        productService.updateProduct(productId , product);
 
-        Product updateProduct = productService.getProductById(productId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
     }
 
     @DeleteMapping("products/{productId}")
@@ -107,4 +121,3 @@ public class ProductController {
 
 
 }
-

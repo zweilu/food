@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <style>
-      body{
-        box-sizing: border-box;
-        background-color: orange;
-      }
-      .square-img{
-        width: 300px;
-        height: 300px;
-        object-fit: cover; 
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>確認訂單</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+  />
+  <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"
+  ></script>
+  <style>
+    body{
+      box-sizing: border-box;
+      background-color: orange;
+    }
+    .square-img{
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+    }
 
-      
-      
-      .quantity-size{
-        width: 100px;
+    .quantity-size{
+      width: 100px;
+    }
 
-      }
-    
     .btn{
       width: 100px;
     }
-    </style>
+  </style>
 </head>
 <body>
-    <section class="sec1">
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">餐廳點菜系統</a>
-            <button
+<section class="sec1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">餐廳點菜系統</a>
+      <button
               class="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
@@ -51,89 +48,99 @@
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">菜單</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="productmange.html">商品管理</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="salesrecord.html">銷售紀錄</a>
-                </li>
-    
-                <li class="nav-item">
-                  <a class="nav-link" href="#">銷售圖表</a>
-                </li>
-              </form>
-      </section>
-    <section class="sec2">
-      <div class="text-center mt-3">
-        <h2>確認交易明細</h2>
-        <h5>交易編號:?????</h5>
-        <h5>現在時間:?????</h5>
-        <div class="mx-5">
-          <table class="table bg-light ">
-            <thead>
-              <tr>
-                <th scope="col">產品編號</th>
-                <th scope="col">產品</th>
-                <th scope="col">產品數量</th>
-                <th scope="col">產品價格</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>美式漢堡</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th >總計</th>
-                <td rowspan="3" class="text-end">350元</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div>
-       
-      </div>
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">菜單</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="productmange.html">商品管理</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="salesrecord.html">銷售紀錄</a>
+          </li>
 
-      <div class="d-flex justify-content-end me-5">
-        <button type="button" class="btn btn-danger me-5" onclick="window.location.href='index.html'">取消</button>
-        <button type="button" class="btn btn-success" onclick="window.location.href='index.html'">確認交易</button>
-      </div>
-      
-    </section>
-      <footer>
-        <div class="container position-fixed bottom-0 ">
-          <p>異國餐廳 &copy; 2023. All Rights Reserved.</p>
-          <p>地址：某某路某某號 | 電話：123-456-7890 | Email：info@example.com</p>
-        </div>
-      </footer>
-    
+          <li class="nav-item">
+            <a class="nav-link" href="#">銷售圖表</a>
+          </li>
+          </form>
+</section>
+<section class="sec2">
+  <div class="text-center mt-3">
+    <h2>確認訂單</h2>
+  </div>
+
+  <table id="cartTable" class="table">
+    <thead>
+    <tr>
+      <th>商品名稱</th>
+      <th>價格</th>
+      <th>數量</th>
+      <th>小計</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 购物车明细行将在 JavaScript 中动态生成 -->
+    </tbody>
+  </table>
+
+  <p id="totalAmount"></p>
+
+  <div class="d-flex justify-content-end me-5">
+    <button type="button" class="btn btn-danger me-5" onclick="window.location.href='index.html'">取消</button>
+    <button type="button" class="btn btn-success" onclick="confirmTransaction()">確認交易</button>
+  </div>
+</section>
+<footer>
+  <div class="container position-fixed bottom-0">
+    <p>異國餐廳 &copy; 2023. All Rights Reserved.</p>
+    <p>地址：某某路某某號 | 電話：123-456-7890 | Email：info@example.com</p>
+  </div>
+</footer>
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 从本地存储中获取购物车信息
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+    // 获取购物车明细表格的元素
+    const cartTable = document.getElementById('cartTable');
+
+    // 初始化总金额
+    let totalAmount = 0;
+
+    // 遍历购物车信息，生成表格行并计算总金额
+    cartItems.forEach(item => {
+      const row = cartTable.insertRow(-1);
+      const cell1 = row.insertCell(0);
+      const cell2 = row.insertCell(1);
+      const cell3 = row.insertCell(2);
+      const cell4 = row.insertCell(3);
+
+      cell1.innerHTML = item.name;
+      cell2.innerHTML = item.price + '元';
+      cell3.innerHTML = item.quantity;
+      const subtotal = item.price * item.quantity;
+      cell4.innerHTML = subtotal + '元';
+
+      totalAmount += subtotal;
+    });
+
+    // 显示总金额
+    const totalAmountElement = document.getElementById('totalAmount');
+    totalAmountElement.textContent = '總金額：' + totalAmount + '元';
+  });
+
+  function confirmTransaction() {
+    alert('訂單確認成功！');
+    // 清空购物车
+    localStorage.removeItem('cartItems');
+    // 跳转回菜单页面
+    window.location.href = 'index.html';
+  }
+</script>
 </html>

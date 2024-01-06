@@ -132,12 +132,12 @@
 
         const productName = document.getElementById('productName').value;
         const productPrice = document.getElementById('productPrice').value;
-        const productImage = document.getElementById('productImage').files[0]; // 获取上传的图片文件
+        const productImage = document.getElementById('productImage').files[0]; // 獲取上傳的圖片文件
 
-        const formData = new FormData(); // 创建 FormData 对象来进行图片上传
+        const formData = new FormData(); // 創建 FormData 對象来進行圖片上傳
         formData.append('productName', productName);
         formData.append('productPrice', productPrice);
-        formData.append('productImage', productImage); // 将图片信息放入 FormData 中
+        formData.append('productImage', productImage); // 將圖片訊息放入 FormData 中
 
         fetch('http://localhost:8888/products', {
             method: 'POST',

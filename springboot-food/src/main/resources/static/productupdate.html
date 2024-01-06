@@ -87,7 +87,7 @@
 <section class="sec2 d-flex justify-content-center align-items-center">
     <div class="container">
         <h2 class="text-center">修改商品資料</h2>
-        <form id="updateProductForm">
+        <form id="updateProductForm" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="productName" class="form-label">商品名稱</label>
                 <input type="text" class="form-control" id="productName" name="productName">
@@ -97,8 +97,8 @@
                 <input type="text" class="form-control" id="productPrice" name="productPrice">
             </div>
             <div class="mb-3">
-                <label for="productImage" class="form-label">商品圖片 URL</label>
-                <input type="text" class="form-control" id="productImage" name="productImage">
+                <label for="productImage" class="form-label">更改商品圖片</label>
+                <input type="file" class="form-control" id="productImage" name="productImage">
             </div>
             <button type="submit" class="btn btn-primary">修改</button>
         </form>
@@ -120,39 +120,54 @@
 
 <script>
 
-    document.getElementById('updateProductForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // 防止預設的表單提交行為
+    document.addEventListener("DOMContentLoaded", function() {
+        // 從 URL 中獲取產品 ID
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('productId');
 
-        const productName = document.getElementById('productName').value;
-        const productPrice = document.getElementById('productPrice').value;
-        const productImage = document.getElementById('productImage').value;
+        // 如果存在 productId，則從伺服器獲取該產品的詳細信息
+        if (productId) {
+            fetch(`http://localhost:8888/products/${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    // 將產品信息填充到表單中
+                    document.getElementById('productName').value = product.productName;
+                    document.getElementById('productPrice').value = product.price;
+                    // 如果有圖片字段，這裡添加設置圖片的邏輯
+                })
+                .catch(error => {
+                    // 處理獲取產品信息時的錯誤
+                    console.error('獲取商品詳情時出錯:', error);
+                });
+        }
 
-        // 做一些資料驗證
+        // 處理表單提交事件
+        document.getElementById('updateProductForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表單的默認提交行為
 
-        // 假設使用 fetch 來發送資料到後端
-        document.addEventListener("DOMContentLoaded", function() {
-            // 获取 URL 参数
-            const params = new URLSearchParams(window.location.search);
-            const productId = params.get('productId');
+            // 創建 FormData 對象來封裝表單數據
+            const formData = new FormData();
+            formData.append('productName', document.getElementById('productName').value);
+            formData.append('productPrice', document.getElementById('productPrice').value);
+            formData.append('productImage', document.getElementById('productImage').files[0]);
 
-            // 如果 productId 存在，你可以根据它执行相应操作
-            if (productId) {
-                // 填充表单或执行其他操作
-                // 例如：
-                // 通过 fetch 请求获取特定商品的详细信息，并填充到表单中
-                fetch(`http://localhost:8888/products/${productId}`)
-                    .then(response => response.json())
-                    .then(product => {
-                        // 填充表单字段
-                        document.getElementById('productName').value = product.productName;
-                        document.getElementById('productPrice').value = product.price;
-                        document.getElementById('productImage').value = product.pic;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching product details:', error);
-                    });
-            }
+            // 向伺服器發送 PUT 請求來更新產品信息
+            fetch(`http://localhost:8888/products/${productId}`, {
+                method: 'PUT',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 處理成功的響應
+                    console.log('Success:', data);
+                    window.location.href = 'productmange.html'; // 返回商品管理頁面
+                })
+                .catch((error) => {
+                    // 處理錯誤
+                    console.error('Error:', error);
+                });
         });
+    });
 </script>
 
 </body>
