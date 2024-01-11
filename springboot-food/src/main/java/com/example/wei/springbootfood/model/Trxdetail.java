@@ -2,26 +2,27 @@ package com.example.wei.springbootfood.model;
 
 public class Trxdetail {
 
-    private Integer detail;
-    private Integer trxid;
+    private Integer id;
+    private Integer trxId;
     private Integer productId;
     private Integer QTY;
     private Integer price;
 
-    public Integer getDetail() {
-        return detail;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setDetail(Integer detail) {
-        this.detail = detail;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getTrxid() {
-        return trxid;
+    public Integer getTrxId() {
+        return trxId;
     }
 
-    public void setTrxid(Integer trxid) {
-        this.trxid = trxid;
+    public void setTrxId(Integer trxId) {
+        this.trxId = trxId;
     }
 
     public Integer getProductId() {

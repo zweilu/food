@@ -142,6 +142,37 @@
     localStorage.removeItem('cartItems');
     // 跳转回菜单页面
     window.location.href = 'index.html';
+
+
   }
+
+  function sendCartDataToServer() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+    // 確認 cartItems 不為 null 或 undefined
+    if (!cartItems) {
+      console.error('No cart items to send');
+      return;
+    }
+
+    fetch('http://yourserver.com/api/cart', { // 將 URL 替換為您的實際 API 端點
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cartItems)
+    })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Success:', data);
+              // 可以在這裡進行後續處理，例如清空 localStorage 或轉跳到其他頁面
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+  }
+
+
+
 </script>
 </html>
