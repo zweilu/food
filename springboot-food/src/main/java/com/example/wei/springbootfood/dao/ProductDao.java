@@ -1,8 +1,8 @@
 package com.example.wei.springbootfood.dao;
 
-import com.example.wei.springbootfood.model.Product;
-
 import java.util.List;
+
+import com.example.wei.springbootfood.model.entity.Product;
 
 public interface ProductDao {
 

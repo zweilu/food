@@ -83,7 +83,7 @@
     // 定义一个空数组用于存储所选商品信息
     let cartItems = [];
 
-    fetch('http://localhost:8888/products')
+    fetch('/products')
         .then(response => response.json())
         .then(products => {
             const productList = document.getElementById('productList');
@@ -99,15 +99,16 @@
                     col.classList.add('col-4');
 
                     col.innerHTML = `
-            <img src="./images/${product.pic}" class="img-thumbnail square-img" alt="${product.productName}">
-            <div class="mb-3">
-              <input type="hidden" class="productName" value="${product.productName}"/>
-              <input type="hidden" class="price" value="${product.price}"/>
-              <h5 class="mt-1">${product.productName} ${product.price}元</h5>
-              <label for="qty" class="form-label ">選擇數量：</label>
-              <input type="number" id="qty" name="qty" class="form-control qty" value="0" min="0">
-            </div>
-          `;
+			            <img src="/food/${product.pic}" class="img-thumbnail square-img" alt="${product.productName}">
+			            <div class="mb-3">
+			              <input type="hidden" class="productId" value="${product.productId}"/>
+			              <input type="hidden" class="productName" value="${product.productName}"/>
+			              <input type="hidden" class="price" value="${product.price}"/>
+			              <h5 class="mt-1">${product.productName} ${product.price}元</h5>
+			              <label for="qty" class="form-label ">選擇數量：</label>
+			              <input type="number" id="qty" name="qty" class="form-control qty" value="0" min="0">
+			            </div>
+		          `;
 
                     row.appendChild(col);
                 }
@@ -126,6 +127,7 @@
         // 遍历商品元素
         productElements.forEach((element, index) => {
             // 获取商品名称、价格和数量输入框的值
+            const productId = element.querySelector('.productId').value;
             const productName = element.querySelector('.productName').value;
             const price = parseFloat(element.querySelector('.price').value);
             const quantity = parseInt(element.querySelector('.qty').value);
@@ -133,7 +135,7 @@
             // 如果数量大于 1，则将商品信息添加到购物车数组
             if (quantity > 0) {
                 const item = {
-                    id: index + 1,
+                	productId: productId,
                     name: productName,
                     price: price,
                     qty: quantity

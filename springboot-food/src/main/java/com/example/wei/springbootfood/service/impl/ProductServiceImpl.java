@@ -1,13 +1,13 @@
 package com.example.wei.springbootfood.service.impl;
 
-import com.example.wei.springbootfood.dao.ProductDao;
-import com.example.wei.springbootfood.model.Product;
-import com.example.wei.springbootfood.service.ProductService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.wei.springbootfood.dao.ProductDao;
+import com.example.wei.springbootfood.model.entity.Product;
+import com.example.wei.springbootfood.service.ProductService;
 
 @Component
 public class ProductServiceImpl implements ProductService {

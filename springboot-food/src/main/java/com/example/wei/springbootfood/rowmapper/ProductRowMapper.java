@@ -1,10 +1,11 @@
 package com.example.wei.springbootfood.rowmapper;
 
-import com.example.wei.springbootfood.model.Product;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.example.wei.springbootfood.model.entity.Product;
 
 public class ProductRowMapper implements RowMapper<Product> {
 

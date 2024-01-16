@@ -138,15 +138,17 @@
                   const row = document.createElement('tr');
 
                   row.innerHTML = `
-          <td>${product.productName}</td>
-          <td>${product.price}</td>
-          <td><img src="./images/${product.pic}" class="img-thumbnail" alt="${product.productName}"></td>
-          <td>
-            <button class="btn btn-primary btn-sm" onclick="window.location.href='productupdate.html?productId=${product.productId}'">修改</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.productId})">刪除</button>
-            <button class="btn btn-success btn-sm" onclick="window.location.href='productadd.html'">新增</button>
-          </td>
-        `;
+			          <td>${product.productName}</td>
+			          <td>${product.price}</td>
+			          <td><img src="/food/${product.pic}" class="img-thumbnail" alt="${product.productName}"></td>
+			          <td>
+			            <button class="btn btn-primary btn-sm" onclick="window.location.href='productupdate.html?productId=${product.productId}'">修改</button>
+			            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.productId})">刪除</button>
+			            <button class="btn btn-success btn-sm" onclick="window.location.href='productadd.html'">新增</button>
+			          </td>
+		          `;
+		          
+		          row.id = "product-"+product.productId;
 
                   productTable.appendChild(row);
                 });
@@ -164,7 +166,7 @@
 
       function deleteProduct(productId) {
         if (confirm('確定要刪除該商品嗎？')) {
-          fetch(`http://localhost:8888/products/${productId}`, {
+          fetch(`/products/${productId}`, {
             method: 'DELETE',
           })
                   .then(response => {

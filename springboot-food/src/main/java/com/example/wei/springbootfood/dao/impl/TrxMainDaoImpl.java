@@ -10,28 +10,25 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.example.wei.springbootfood.dao.TrxDetailDao;
-import com.example.wei.springbootfood.model.entity.TrxDetail;
+import com.example.wei.springbootfood.dao.TrxMainDao;
+import com.example.wei.springbootfood.model.entity.TrxMain;
 
 @Repository
-public class TrxDetailDaoImpl implements TrxDetailDao {
+public class TrxMainDaoImpl implements TrxMainDao {
 
-    @Autowired
+	@Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Override
-    public int save(TrxDetail trxDetail) {
-        String sql = "INSERT INTO trx_detail (TRX_ID, PRODUCT_ID, QTY, PRICE) VALUES (:trxId, :productId, :qty, :price)";
+	@Override
+	public int save(TrxMain trxMain) {
+		String sql = "INSERT INTO trx_main (TOTAL) VALUES (:total)";
         Map<String, Object> map = new HashMap<>();
-        map.put("trxId", trxDetail.getTrxId());
-        map.put("productId", trxDetail.getProductId());
-        map.put("qty", trxDetail.getQty());
-        map.put("price", trxDetail.getPrice());
+        map.put("total", trxMain.getTotal());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowUpdate = namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
-        int id = keyHolder.getKey().intValue();
-        trxDetail.setId(id);
+        int trxId = keyHolder.getKey().intValue();
+        trxMain.setTrxId(trxId);
         return rowUpdate;
-    }
+	}
 
 }

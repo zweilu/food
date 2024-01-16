@@ -1,9 +1,10 @@
 package com.example.wei.springbootfood.service;
 
-import com.example.wei.springbootfood.model.Product;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.example.wei.springbootfood.model.entity.Product;
 
 @Component
 public interface ProductService {

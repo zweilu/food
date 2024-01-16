@@ -1,26 +1,22 @@
 package com.example.wei.springbootfood.dao.impl;
 
-import com.example.wei.springbootfood.dao.ProductDao;
-import com.example.wei.springbootfood.model.Product;
-import com.example.wei.springbootfood.rowmapper.ProductRowMapper;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.example.wei.springbootfood.dao.ProductDao;
+import com.example.wei.springbootfood.model.entity.Product;
+import com.example.wei.springbootfood.rowmapper.ProductRowMapper;
 
 @Component
-public class productDaoImpl implements ProductDao {
+public class ProductDaoImpl implements ProductDao {
 
     @Autowired
     private  NamedParameterJdbcTemplate namedParameterJdbcTemplate;

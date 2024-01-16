@@ -1,4 +1,4 @@
-package com.example.wei.springbootfood.request;
+package com.example.wei.springbootfood.model.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
