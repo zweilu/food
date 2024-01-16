@@ -2,7 +2,7 @@ package com.example.wei.springbootfood.model;
 
 import java.util.Date;
 
-public class Trxmain {
+public class TrxMain {
 
     private Integer trxId;
     private Date checkoutTime;
