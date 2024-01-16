@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import com.example.wei.springbootfood.model.dto.ProductRequest;
 import com.example.wei.springbootfood.model.entity.Product;
@@ -28,6 +26,13 @@ import com.example.wei.springbootfood.service.ProductService;
 @RestController
 public class ProductController {
 
+	static {
+		String dir = "C:/food/";
+		File dirFile = new File(dir);
+		if(!dirFile.exists())
+			dirFile.mkdirs();
+	}
+	
 	@Autowired
 	private ProductService productService;
 
@@ -55,12 +60,6 @@ public class ProductController {
 
 		try {
 			String filename = productImage.getOriginalFilename();
-			
-			String dir = "C:/food/";
-			File dirFile = new File(dir);
-			if(!dirFile.exists())
-				dirFile.mkdirs();
-			
 			String path = "C:/food/"+ filename;
 			File newFile = new File(path);
 			productImage.transferTo(newFile);
@@ -86,15 +85,9 @@ public class ProductController {
 
 	@PutMapping("/products/{productId}")
 	public ResponseEntity<?> updateProduct(@PathVariable Integer productId,
-			@ModelAttribute ProductRequest productRequest, @RequestParam("productImage") MultipartFile productImage) {
+			@ModelAttribute ProductRequest productRequest, @RequestParam(value = "productImage",required = false) MultipartFile productImage) {
 
 		try {
-			String filename = productImage.getOriginalFilename();
-			String path = "C:/Users/User/Desktop/MyProject/food/springboot-food/src/main/resources/static/images/"
-					+ filename;
-			File newFile = new File(path);
-			productImage.transferTo(newFile);
-
 			Product product = productService.getProductById(productId);
 			if (product == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
@@ -102,14 +95,21 @@ public class ProductController {
 
 			product.setProductName(productRequest.getProductName());
 			product.setPrice(productRequest.getProductPrice());
-			product.setPic(filename);
 
+			if(productImage != null) {
+				String filename = productImage.getOriginalFilename();
+				String path = "C:/food/"+ filename;
+				File newFile = new File(path);
+				productImage.transferTo(newFile);
+				product.setPic(filename);
+			}
+			
 			productService.updateProduct(productId, product);
 
 			// 返回更新后的商品訊息
-
 			return ResponseEntity.ok(product);
 		} catch (IOException e) {
+			e.printStackTrace();
 			// 错误处理
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving the file");
 		}

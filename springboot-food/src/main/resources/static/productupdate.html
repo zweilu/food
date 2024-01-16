@@ -152,7 +152,7 @@
             formData.append('productImage', document.getElementById('productImage').files[0]);
 
             // 向伺服器發送 PUT 請求來更新產品信息
-            fetch(`http://localhost:8888/products/${productId}`, {
+            fetch(`/products/${productId}`, {
                 method: 'PUT',
                 body: formData
             })

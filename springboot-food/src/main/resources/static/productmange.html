@@ -129,7 +129,7 @@
     </footer>
 
     <script>
-      fetch('http://localhost:8888/products')
+      fetch('/products')
               .then(response => response.json())
               .then(products => {
                 const productTable = document.getElementById('productTable');
@@ -169,22 +169,22 @@
           fetch(`/products/${productId}`, {
             method: 'DELETE',
           })
-                  .then(response => {
-                    if (response.ok) {
-                      // 删除成功，从页面移除该商品信息
-                      const productRow = document.getElementById(`product-${productId}`);
-                      if (productRow) {
-                        productRow.remove();
-                      } else {
-                        console.error('無法找到要刪除的商品');
-                      }
-                    } else {
-                      throw new Error('無法刪除商品');
-                    }
-                  })
-                  .catch(error => {
-                    console.error('刪除商品時出錯:', error);
-                  });
+          .then(response => {
+            if (response.ok) {
+              // 删除成功，从页面移除该商品信息
+              const productRow = document.getElementById(`product-${productId}`);
+              if (productRow) {
+                productRow.remove();
+              } else {
+                console.error('無法找到要刪除的商品');
+              }
+            } else {
+              throw new Error('無法刪除商品');
+            }
+          })
+          .catch(error => {
+            console.error('刪除商品時出錯:', error);
+          });
         }
       }
     </script>
