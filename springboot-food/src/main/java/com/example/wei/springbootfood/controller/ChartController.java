@@ -24,7 +24,13 @@ public class ChartController {
 			[ '炒飯', 600, 'color: #109618' ],
 			[ '薯條', 250, 'color: #990099' ]
 		];
-	 * @return
+	 * 
+	 * 撈資料：
+	 *  select p.PRODUCT_NAME as "產品名稱", sum(m.TOTAL) as "銷售金額"
+		from trx_main m, trx_detail d, product p
+		where m.TRX_ID = d.TRX_ID and p.PRODUCT_ID = d.PRODUCT_ID
+		group by p.PRODUCT_NAME;
+	 * 
 	 */
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Object[]> getChart() {
