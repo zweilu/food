@@ -116,7 +116,7 @@ public class ProductController {
 
 	}
 
-	@DeleteMapping("products/{productId}")
+	@DeleteMapping("/products/{productId}")
 	public ResponseEntity<Product> deleteProduct(@PathVariable Integer productId) {
 		productService.deleteProductById(productId);
 
