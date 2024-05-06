@@ -106,11 +106,11 @@ public class ProductController {
 			
 			productService.updateProduct(productId, product);
 
-			// 返回更新后的商品訊息
+			// 返回更新後的商品資訊
 			return ResponseEntity.ok(product);
 		} catch (IOException e) {
 			e.printStackTrace();
-			// 错误处理
+			// 錯誤處理
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving the file");
 		}
 
